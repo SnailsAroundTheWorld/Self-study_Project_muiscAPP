@@ -6,10 +6,9 @@ body {
 }
 
 .login_div {
-	width: 400px;
+	width: 470px;
 	margin: 0 auto;
-	height: 290px;
-	padding: 20px 30px;
+	padding:20px 30px;
 	box-shadow: 0px 0px 5px #999;
 	border-radius: 10px;
 }
@@ -17,3 +16,50 @@ body {
 .login_div h2{ 
 	text-align:center;
 	}
+
+.admin_top_left_div{
+	float: right;
+	padding-right:20px;
+}
+
+.admin_top_left_div>a{
+	line-height: 50px;
+	font-size:1.5rem;
+	margin: 0 10px;
+}
+.admin_top_left_div>a>img{
+	margin: 0 5px;
+}
+.row{
+	margin: 0;
+	padding: 0;
+}
+<script>
+	    	$(document).ready(function(){
+	    		$('.btn').click(function(){
+	    			var username=$(".Username").val();
+	    			var password=$(".Password").val();
+	    			if(username==null||username==""){
+	    				alert("请输入用户名！！")
+	    			}else if(password==null||password==""){
+	    				alert("请输入密码！！")
+	    			}else{
+	    				$.ajax({
+		    		        url: "http://wangwei.hangyutech.com/study/login.php" ,
+		    		        type: "post",
+		    		        dataType: "json",
+		    		        data:{username:$("#Username").val(),password:$("#Password").val()},
+		    		        async: false,
+		    		        success: function(json){
+		    		            if(json.status==1){
+		    		            	alert("111")
+		    		            	window.location.href="Admin_maintain.html";
+		    		            }else{
+		    		            	alert(json.msg);
+		    		            }
+		    		    	}
+		    		    })
+		    		}        
+			       });
+			    });   
+	    </script>
