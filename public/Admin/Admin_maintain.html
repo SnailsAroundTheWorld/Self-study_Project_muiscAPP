@@ -11,17 +11,254 @@
   <body>
 		<div class="row">
   		<div class="col-md-2 col-sm-6">
-  			<img src="../static/img/music_logo.png" height="50px"/>My Music
+  			<div class="music_logo">
+  			<img src="../static/img/music_logo.png" height="55" />My Music
+  			</div>
   		</div>
   		<div class="col-md-10 col-sm-6">
   			<div class="admin_top_left_div">
 		  			<a href=""><img src="../static/img/admin.png" height="19"/>admin </a>
 		  			<a href=""><img src="../static/img/backstage.png" height="20"/>后台页面 </a>
-		  			<a href=""><img src="../static/img/quit.png" height="15"/>退出 </a>	
+		  			<a href="login.html" target="_parent"><img src="../static/img/quit.png" height="15"/>退出 </a>	
   			</div>
   		</div>
 		</div>
-		
+		<div class="row">
+  		<div class="col-md-2 col-sm-3"  >
+ 					<dl>
+ 						<dt>日志</dt>
+  					<dd><a href="Backstage_index.html"  target="_parent">后台登录日志</a></dd>
+  					<dd><a href="Operation_log.html"  target="_parent">操作日志</a></dd>
+  				</dl>
+  				<dl>	
+  					<dt>管理员</dt>
+  					<dd><a href="Music_index.html"  target="_parent">管理员维护</a></dd>
+					</dl>
+					<dl>
+						<dt>音乐</dt>
+						<dd><a href="Music_index.html"  target="_parent">音乐</a></dd>
+					</dl>
+  		</div>
+  		<div class="col-md-10 col-sm-9" >
+  			<ol class="breadcrumb text-primary">
+				  <li>当前位置：</li>
+				  <li>管理员</li>
+				  <li class="active">管理员维护</li>
+				</ol>
+				<form class="form-inline">
+				  <div class="clean_float">
+				  	<h4 class="fl">管理员维护</h4> 
+				  	<button type="button" class="btn btn-primary  fr" data-toggle="modal" data-target="#myModal">新增</button>
+				  </div>
+					<div class="form-group admin_from_input">
+				    <label for="admin">管理员</label>
+				    <input type="text" class="form-control" id="admin" placeholder="请输入管理员">
+				  </div>
+					<div class="form-group admin_from_input">  
+						<label for="StartGroup">用户组</label>
+					  <select class="form-control" id="StartGroup">
+						  <option value="1" selected="selected">超级管理员 </option>
+						  <option value="2">中级管理员</option>
+						  <option value="3">初级管理员</option>
+						</select>
+					</div>	
+				  <div class="form-group admin_from_input">
+				    <label for="StartTime">开始时间</label>
+				    <input type="datetime" class="form-control" id="StartTime" placeholder="请输入开始时间">
+				  </div>
+				  <div class="form-group admin_from_input">
+				    <label for="EndtTime">结束时间</label>
+				    <input type="datetime" class="form-control" id="EndtTime" placeholder="请输入结束时间">
+				  </div>
+				  <button type="submit" class="btn btn-primary admin_from_input">查询</button>
+				</form>
+				<div class="admin_table_div">
+					<table class="table table-bordered table-hover table-condensed">
+						<thead>
+							<tr class="info">
+								<th>ID</th>
+								<th>帐号</th>
+								<th>用户组</th>
+								<th>用户状态</th>
+								<th>修改日期</th>
+								<th>最后登录时间</th>
+								<th>最后登录IP</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							
+						</tbody>
+					</table>
+				</div>	
+	  		<nav aria-label="Page navigation">
+				  <ul class="pagination">
+				    <li>
+				      <a href="#" aria-label="Previous">
+				        <span aria-hidden="true">&laquo;</span>
+				      </a>
+				    </li>
+				    <li><a href="#">1</a></li>
+				    <li><a href="#">2</a></li>
+				    <li><a href="#">3</a></li>
+				    <li><a href="#">4</a></li>
+				    <li><a href="#">5</a></li>
+				    <li>
+				      <a href="#" aria-label="Next">
+				        <span aria-hidden="true">&raquo;</span>
+				      </a>
+				    </li>
+				  </ul>
+				</nav>
+  		</div>
+		</div>
+<!--添加用户-->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">添加管理员</h4>
+		      </div>
+		      <div class="modal-body">
+		      		<form class="form-horizontal">
+								  <div class="form-group">
+								    <label for="AddName" class="col-sm-2 control-label">账号</label>
+								    <div class="col-sm-10">
+								      <input type="text" class="form-control" id="AddName" placeholder="请输入账号">
+								    </div>
+								  </div>
+								  <div class="form-group">
+								    <label for="AddPassword" class="col-sm-2 control-label">密码</label>
+								    <div class="col-sm-10">
+								      <input type="password" class="form-control" id="AddPassword" placeholder="请输入密码">
+								    </div>
+								  </div>
+								  <div class="form-group">
+								    <label for="Type" class="col-sm-2 control-label">类别</label>
+								    <div class="col-sm-10">
+								    	<select class="form-control" id="AddType">
+											  <option value="1" selected="selected">超级管理员 </option>
+											  <option value="2">中级管理员</option>
+											  <option value="3">初级管理员</option>
+											</select>
+								    </div>
+								  </div>
+								  <div class="form-group">
+								    <label  class="col-sm-2 control-label">状态</label>
+								    <div class="col-sm-10">
+								    	<label class="radio-inline">
+											  <input type="radio" name="AddState" id="state1" value="0" checked="checked"> 正常
+											</label>
+											<label class="radio-inline">
+											  <input type="radio" name="AddState" id="state2" value="1"> 禁用
+											</label>
+								    </div>
+								  </div>
+							</form>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+		        <button type="button" class="btn btn-primary add">确定</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script>
+    	$("dt").click(function(){
+    		$("dd").hide();
+    		$(this).siblings().show();
+    	});
+		</script>
+		<script>
+			$(document).ready(function(){
+			 		$('.add').click(function(){
+							  	var username=$("#AddName").val();
+									var password=$("#AddPassword").val();
+							  	if(username==null||username==""){
+							  		alert("请输入用户名！！")
+							  	}else if(password==null||password==""){
+							  		alert("请输入密码！！")
+							  	}else{
+									   	$.ajax({
+									   	        url: "http://wangwei.hangyutech.com/study/manage-add.php" ,
+									   	        type: "post",
+									   	        dataType: "json",
+									   	        data:{
+									   	        	username:$("#AddName").val(),
+									   	        	password:$("#AddPassword").val(),
+									   	        	type:$("#AddType").val(),
+																status:$("input[name='AddState']:checked").val(),
+									   	        },
+									   	        async: false,
+									   	        success: function(json){
+									   	            if(json.status==1){
+									   	                alert(json.msg);
+									   	             		/*确定后清除数据*/
+									   	             		$("#AddName").val("");
+									   	        				$("#AddPassword").val("");
+									   	        				window.location.reload();
+									   	                }
+									   	            else{
+									   	            	alert(json.msg);
+									   	            }
+									   	            $("#myModal").modal("hide");
+									   	        }
+									   	});	
+									}
+			 		});
+			});
+		</script>
+		<script>
+			$(document).ready(function(){
+					$.ajax({
+						url:"http://wangwei.hangyutech.com/study/manage.php",
+						datatype:"json",
+						type:"get",
+						async:false,
+						success:function(admin){
+							/*
+							 *方法一 
+							var td="";
+							for(i=0;i<admin.data.length;i++){
+								td+="<tr>";
+								td+="<td>"+admin.data[i].id+"</td>";
+								td+="<td>"+admin.data[i].username+"</td>";
+								td+="<td>"+admin.data[i].type+"</td>";
+								td+="<td>"+admin.data[i].status+"</td>";
+								td+="<td>"+admin.data[i].created_time+"</td>";
+								td+="<td>"+admin.data[i].update_time+"</td>";
+								td+="<td>"+""+"</td>";
+								td+="<td><button type=\"button\"  class=\"btn btn-default\">修改</button><button type=\"button\" class=\"btn btn-default\">删除</button>	</td>";
+								td+="</tr>";
+							}
+							$(".table tbody").html(td);
+							*/
+							/*
+							 *方法二 *
+							 *注意+=*
+							*/
+							var td="";
+							for(i=0;i<admin.data.length;i++){
+								td+="<tr>"+"<td>"+admin.data[i].id+"</td>"
+								+"<td>"+admin.data[i].username+"</td>"
+								+"<td>"+admin.data[i].type+"</td>"
+								+"<td>"+admin.data[i].status+"</td>"
+								+"<td>"+admin.data[i].created_time+"</td>"
+								+"<td>"+admin.data[i].update_time+"</td>"
+								+"<td>"+""+"</td>"
+								+"<td><button type=\"button\"  class=\"btn btn-default\">修改</button><button type=\"button\" class=\"btn btn-default\">删除</button>	</td>"
+								+"</tr>"
+							}
+							$(".table tbody").html(td);
+						}
+					});
+			});
+			
+			
+		</script>
   </body>
 </html>
 

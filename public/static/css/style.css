@@ -5,61 +5,117 @@ body {
 	height: 100%;
 }
 
+.clean_float:after {
+	content: ".";
+	height: 0px;
+	visibility: hidden;
+	display: block;
+	clear: both;
+}
+
+.fl {
+	float: left;
+}
+
+.fr {
+	float: right;
+}
+
 .login_div {
 	width: 470px;
 	margin: 0 auto;
-	padding:20px 30px;
+	padding: 20px 30px;
 	box-shadow: 0px 0px 5px #999;
 	border-radius: 10px;
 }
 
-.login_div h2{ 
-	text-align:center;
-	}
-
-.admin_top_left_div{
-	float: right;
-	padding-right:20px;
+.login_div h2 {
+	text-align: center;
 }
 
-.admin_top_left_div>a{
-	line-height: 50px;
-	font-size:1.5rem;
+.admin_top_left_div {
+	float: right;
+	padding-right: 20px;
+}
+
+.admin_top_left_div>a {
+	line-height: 65px;
+	font-size: 1.5rem;
 	margin: 0 10px;
 }
-.admin_top_left_div>a>img{
+
+.admin_top_left_div>a>img {
 	margin: 0 5px;
 }
-.row{
+
+.music_logo img {
+	position: relative;
+	animation: myfirst 1s;
+	-moz-animation: myfirst 1s;
+	/* Firefox */
+	-webkit-animation: myfirst 1s;
+	/* Safari and Chrome */
+	-o-animation: myfirst 1s;
+	/* Opera */
+	animation-iteration-count: infinite;
+	margin: 5px 10px;
+}
+
+@keyframes myfirst {
+	0% {
+		transform: rotate(0deg);
+	}
+	10% {
+		transform: rotate(36deg);
+	}
+	20% {
+		transform: rotate(72deg);
+	}
+	30% {
+		transform: rotate(108deg);
+	}
+	40% {
+		transform: rotate(144deg);
+	}
+	50% {
+		transform: rotate(180deg);
+	}
+	60% {
+		transform: rotate(216deg);
+	}
+	70% {
+		transform: rotate(252deg);
+	}
+	80% {
+		transform: rotate(288deg);
+	}
+	90% {
+		transform: rotate(324deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.row {
 	margin: 0;
 	padding: 0;
 }
-<script>
-	    	$(document).ready(function(){
-	    		$('.btn').click(function(){
-	    			var username=$(".Username").val();
-	    			var password=$(".Password").val();
-	    			if(username==null||username==""){
-	    				alert("请输入用户名！！")
-	    			}else if(password==null||password==""){
-	    				alert("请输入密码！！")
-	    			}else{
-	    				$.ajax({
-		    		        url: "http://wangwei.hangyutech.com/study/login.php" ,
-		    		        type: "post",
-		    		        dataType: "json",
-		    		        data:{username:$("#Username").val(),password:$("#Password").val()},
-		    		        async: false,
-		    		        success: function(json){
-		    		            if(json.status==1){
-		    		            	alert("111")
-		    		            	window.location.href="Admin_maintain.html";
-		    		            }else{
-		    		            	alert(json.msg);
-		    		            }
-		    		    	}
-		    		    })
-		    		}        
-			       });
-			    });   
-	    </script>
+
+dl {
+	margin: 20px;
+}
+
+dd {
+	display: none;
+	padding: 10px 0;
+}
+
+.admin_from_input {
+	margin: 15px 0 0 10px;
+}
+
+.admin_table_div {
+	min-height: 365px;
+	padding-top: 30px;
+}
