@@ -319,7 +319,7 @@
 						}	;
 						td+="<td>"+status+"</td>";
 						td+="<td>"+SongList.data[i].created_time+"</td>";
-						td+="<td><button type=\"button\" data-title=\""+SongList.data[i].title+"\" data-url=\""+SongList.data[i].url+"\" data-img=\""+SongList.data[i].img+"\" data-singer=\""+SongList.data[i].singer+"\" data-type=\""+SongList.data[i].type+"\" data-created_time=\""+SongList.data[i].created_time+"\" class=\"btn btn-default fr\" data-toggle=\"modal\" data-target=\"#myModal1\">修改</button></td>";
+						td+="<td><button type=\"button\" data-title=\""+SongList.data[i].title+"\" data-url=\""+SongList.data[i].url+"\" data-img=\""+SongList.data[i].img+"\" data-singer=\""+SongList.data[i].singer+"\"   data-status=\""+SongList.data[i].status+"\"       class=\"btn btn-default fr\" data-toggle=\"modal\" data-target=\"#myModal1\">修改</button></td>";
 						td+="</tr>";
 						}
 						$("table tbody").html(td)
@@ -335,10 +335,14 @@
 						var url=$(this).attr("data-url");
 						var img=$(this).attr("data-img");
 						var singer=$(this).attr("data-singer");
+						var type=$(this).attr("data-type");
+						var status=$(this).attr("data-status");
 			    	$("#SongName1").val(title);	
 			    	$("#SongUrl1").val(url);
 			    	$("#SongImg1").val(img);	
-			    	$("#Singer1").val(singer);	
+			    	$("#Singer1").val(singer);
+			    	$("#SongType1").val(type);
+			    	$("input[name='SongState1']:checked").val(status);	
 			  });
 			});
 		</script>
