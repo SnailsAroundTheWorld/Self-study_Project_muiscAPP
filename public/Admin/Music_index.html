@@ -115,22 +115,22 @@
 								  <div class="form-group">
 								    <label for="SongImg" class="col-sm-2 control-label">歌曲图片</label>
 								    <div class="col-sm-10">
-								      <input type="password" class="form-control" id="SongImg" placeholder="请输入歌曲图片">
+								      <input type="text" class="form-control" id="SongImg" placeholder="请输入歌曲图片">
 								    </div>
 								  </div>
 								   <div class="form-group">
 								    <label for="Singer" class="col-sm-2 control-label">歌手名</label>
 								    <div class="col-sm-10">
-								      <input type="password" class="form-control" id="Singer" placeholder="请输入歌手名">
+								      <input type="text" class="form-control" id="Singer" placeholder="请输入歌手名">
 								    </div>
 								  </div>
 								  <div class="form-group">
 								    <label for="SongType" class="col-sm-2 control-label">类型</label>
 								    <div class="col-sm-10">
 								    	<select class="form-control" id="SongType">
-											  <option value="1" selected="selected">未知 </option>
-											  <option value="2">现代音乐</option>
-											  <option value="3"> 古曲音乐</option>
+											  <option value="0" selected="selected">未知 </option>
+											  <option value="1">现代音乐</option>
+											  <option value="2"> 古曲音乐</option>
 											</select>
 								    </div>
 								  </div>
@@ -169,34 +169,34 @@
 								  <div class="form-group">
 								    <label for="SongName" class="col-sm-2 control-label">歌曲名</label>
 								    <div class="col-sm-10">
-								      <input type="text" class="form-control" id="SongName1" placeholder="请输入歌曲名">
+								      <input type="text" class="form-control" id="SongName1" placeholder="">
 								    </div>
 								  </div>
 								  <div class="form-group">
 								    <label for="SongUrl" class="col-sm-2 control-label">歌曲URL</label>
 								    <div class="col-sm-10">
-								      <input type="text" class="form-control" id="SongUrl1" placeholder="请输入歌曲URL">
+								      <input type="text" class="form-control" id="SongUrl1" placeholder="">
 								    </div>
 								  </div> 
 								  <div class="form-group">
 								    <label for="SongImg" class="col-sm-2 control-label">歌曲图片</label>
 								    <div class="col-sm-10">
-								      <input type="password" class="form-control" id="SongImg1" placeholder="请输入歌曲图片">
+								      <input type="text" class="form-control" id="SongImg1" placeholder="">
 								    </div>
 								  </div>
 								   <div class="form-group">
 								    <label for="Singer" class="col-sm-2 control-label">歌手名</label>
 								    <div class="col-sm-10">
-								      <input type="password" class="form-control" id="Singer1" placeholder="请输入歌手名">
+								      <input type="text" class="form-control" id="Singer1" placeholder="">
 								    </div>
 								  </div>
 								  <div class="form-group">
 								    <label for="SongType" class="col-sm-2 control-label">类型</label>
 								    <div class="col-sm-10">
 								    	<select class="form-control" id="SongType1">
-											  <option value="1" selected="selected">未知 </option>
-											  <option value="2">现代音乐</option>
-											  <option value="3"> 古曲音乐</option>
+											 	  <option value="0" selected="selected">未知</option>
+												  <option value="1" >现代音乐</option>
+												  <option value="2">古典音乐</option>
 											</select>
 								    </div>
 								  </div>
@@ -204,10 +204,10 @@
 								    <label  class="col-sm-2 control-label">状态</label>
 								    <div class="col-sm-10">
 								    	<label class="radio-inline">
-											  <input type="radio" name="SongState" id="state3" value="0" checked="checked"> 正常
+											  <input type="radio" name="SongState1" id="state3" value="0" checked="checked"> 正常
 											</label>
 											<label class="radio-inline">
-											  <input type="radio" name="SongState" id="state4" value="1"> 禁用
+											  <input type="radio" name="SongState1" id="state4" value="1"> 禁用
 											</label>
 								    </div>
 								  </div>
@@ -257,7 +257,8 @@
 										img	:$("#SongImg").val(),
 										singer:$("#Singer").val(),
 										type:$("#SongType")	.val(),
-										status:$("input[name='SongState']:checked").val()},
+										status:$("input[name='SongState']:checked").val()
+										},
 			    		type:"post",
 			    		datatype:"json",
 			    		async:false,
@@ -288,15 +289,37 @@
 						var td="";
 						for(i=0;i<SongList.data.length;i++){
 						td+="<tr>";
-						td+="<td data-name=\'name\'>"+SongList.data[i].id+"</td>";
+						td+="<td>"+SongList.data[i].id+"</td>";
 						td+="<td>"+SongList.data[i].title+"</td>";
 						td+="<td>"+SongList.data[i].url+"</td>";
 						td+="<td>"+SongList.data[i].img+"</td>";
 						td+="<td>"+SongList.data[i].singer+"</td>";
-						td+="<td>"+SongList.data[i].type+"</td>";
-						td+="<td>"+SongList.data[i].status+"</td>";
+						/*判断类型*/
+							switch(SongList.data[i].type){
+	    					case"0":
+	    					type="未知";
+	    					break;
+	    					case "1":
+	    					type="现代音乐";
+	    					break;
+	    					case "2":
+	    					type="古典音乐";
+	    					break;
+	    					default:
+	    					type=""
+	    				}
+	    				td+="<td>"+type+"</td>";
+
+						/*判断状态*/
+						var status=SongList.data[i].status;
+							if(status==0){
+							status="正常";	
+						}else{
+							status="禁用";
+						}	;
+						td+="<td>"+status+"</td>";
 						td+="<td>"+SongList.data[i].created_time+"</td>";
-						td+="<td><button type=\"button\" class=\"btn btn-default  fr\" data-toggle=\"modal\" data-target=\"#myModal1\">修改</button></td>";
+						td+="<td><button type=\"button\" data-title=\""+SongList.data[i].title+"\" data-url=\""+SongList.data[i].url+"\" data-img=\""+SongList.data[i].img+"\" data-singer=\""+SongList.data[i].singer+"\" data-type=\""+SongList.data[i].type+"\" data-created_time=\""+SongList.data[i].created_time+"\" class=\"btn btn-default fr\" data-toggle=\"modal\" data-target=\"#myModal1\">修改</button></td>";
 						td+="</tr>";
 						}
 						$("table tbody").html(td)
@@ -304,34 +327,47 @@
 				})
 			});
 		</script>
-		<!--修改音乐-->	
+		<!--点击修改获取获取数据-->	
 		<script>
 			$(document).ready(function(){
-			  $('modify').click(function(){
-			  		var name=$(this).attr("data-name")
-			    	$("#SongName1").val(name);
-			    	/*$.ajax({
+			  $(".btn").click(function(){
+						var title=$(this).attr("data-title");
+						var url=$(this).attr("data-url");
+						var img=$(this).attr("data-img");
+						var singer=$(this).attr("data-singer");
+			    	$("#SongName1").val(title);	
+			    	$("#SongUrl1").val(url);
+			    	$("#SongImg1").val(img);	
+			    	$("#Singer1").val(singer);	
+			  });
+			});
+		</script>
+		<!--修改音乐-->
+		<script>
+			$(document).ready(function(){
+			 $("modify").click(function(){
+						$.ajax({
 			    		url:"http://wangwei.hangyutech.com/study/music-add.php",
 			    		data:{
-			    					title:$("#SongName").val(),
-										url	:$("#SongUrl").val(),
-										img	:$("#SongImg").val(),
-										singer:$("#Singer").val(),
-										type:$("#SongType")	.val(),
-										status:$("input[name='SongState']:checked").val()},
+			    					title:$("#SongName1").val(),
+										url	:$("#SongUrl1").val(),
+										img	:$("#SongImg1").val(),
+										singer:$("#Singer1").val(),
+										type:$("#SongType1").val(),
+										status:$("input[name='SongState1']:checked").val()},
 			    		type:"post",
 			    		datatype:"json",
 			    		async:false,
-			    		success:function(song){
-			    			if(song.status==1){
-			    				alert(song.msg);
+			    		success:function(Msong){
+			    			if(Msong.status==1){
+			    				alert(Msong.msg);
 			    				window.location.reload();
 			    			}else{
-			    				alert(song.msg);
+			    				alert(Msong.msg);
 			    			}
-			    			$("#myModal").modal("hide");
+			    			$("#myModal1").modal("hide");
 			    		}
-			    	})*/
+			    	})
 			    
 			  });
 			});
