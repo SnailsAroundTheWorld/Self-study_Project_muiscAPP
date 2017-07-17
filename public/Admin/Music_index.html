@@ -319,7 +319,7 @@
 						}	;
 						td+="<td>"+status+"</td>";
 						td+="<td>"+SongList.data[i].created_time+"</td>";
-						td+="<td><button type=\"button\" data-title=\""+SongList.data[i].title+"\" data-url=\""+SongList.data[i].url+"\" data-img=\""+SongList.data[i].img+"\" data-singer=\""+SongList.data[i].singer+"\"   data-status=\""+SongList.data[i].status+"\"       class=\"btn btn-default fr\" data-toggle=\"modal\" data-target=\"#myModal1\">修改</button></td>";
+						td+="<td><button type=\"button\" data-title=\""+SongList.data[i].title+"\" data-url=\""+SongList.data[i].url+"\" data-img=\""+SongList.data[i].img+"\" data-singer=\""+SongList.data[i].singer+"\" data-status=\""+SongList.data[i].status+"\" class=\"btn btn-default fr\" data-toggle=\"modal\" data-target=\"#myModal1\">修改</button></td>";
 						td+="</tr>";
 						}
 						$("table tbody").html(td)
@@ -343,13 +343,38 @@
 			    	$("#Singer1").val(singer);
 			    	$("#SongType1").val(type);
 			    	$("input[name='SongState1']:checked").val(status);	
+			    	
+			    	$(".modify").click(function(){
+							$.ajax({
+				    		url:"http://wangwei.hangyutech.com/study/music-add.php",
+				    		data:{
+				    					title:title,
+											url	:url,
+											img	:img,
+											singer:singer,
+											type:type,
+											status:status,},
+				    		type:"post",
+				    		datatype:"json",
+				    		async:false,
+				    		success:function(Msong){
+				    			if(Msong.status==1){
+				    				alert(Msong.msg);
+				    				window.location.reload();
+				    			}else{
+				    				alert(Msong.msg);
+				    			}
+				    			$("#myModal1").modal("hide");
+				    		}
+						  });
+			    	});	
+			    });	
 			  });
-			});
 		</script>
 		<!--修改音乐-->
 		<script>
-			$(document).ready(function(){
-			 $("modify").click(function(){
+			/*$(document).ready(function(){
+			 $(".modify").click(function(){
 						$.ajax({
 			    		url:"http://wangwei.hangyutech.com/study/music-add.php",
 			    		data:{
@@ -374,7 +399,7 @@
 			    	})
 			    
 			  });
-			});
+			});*/
 		</script>
   </body>
 </html>
