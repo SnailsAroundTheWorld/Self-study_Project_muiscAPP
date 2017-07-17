@@ -351,6 +351,7 @@
 			    	$("#Singer1").val(singer);
 			    	$("#SongType1").val(type);
 			    	$("input[name='SongState1']:checked").val(status);	
+			    	alert(status);
 			    });	
 			  });
 		</script>
@@ -366,12 +367,13 @@
 								    	url:$("#SongUrl1").val(),
 								    	img:$("#SongImg1").val(),	
 								    	singer:$("#Singer1").val(),
-								    	type:$("input[name='SongState1']:checked").val(),
-											status:status},
+								    	type:$("#SongType1").val(),
+											status:$("input[name='SongState1']:checked").val()},
 				    		type:"post",
 				    		datatype:"json",
 				    		async:false,
 				    		success:function(Msong){
+				    			
 				    			if(Msong.status==1){
 				    				alert(Msong.msg);
 				    				window.location.reload();
