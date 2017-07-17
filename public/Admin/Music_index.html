@@ -319,7 +319,7 @@
 						}	;
 						td+="<td>"+status+"</td>";
 						td+="<td>"+SongList.data[i].created_time+"</td>";
-						td+="<td><button type=\"button\" data-title=\""+SongList.data[i].title+"\" data-url=\""+SongList.data[i].url+"\" data-img=\""+SongList.data[i].img+"\" data-singer=\""+SongList.data[i].singer+"\" data-status=\""+SongList.data[i].status+"\" class=\"btn btn-default fr\" data-toggle=\"modal\" data-target=\"#myModal1\">修改</button></td>";
+						td+="<td><button type=\"button\" data-id=\""+SongList.data[i].id+"\" data-title=\""+SongList.data[i].title+"\" data-url=\""+SongList.data[i].url+"\" data-img=\""+SongList.data[i].img+"\" data-singer=\""+SongList.data[i].singer+"\" data-status=\""+SongList.data[i].status+"\" class=\"btn btn-default fr\" data-toggle=\"modal\" data-target=\"#myModal1\">修改</button></td>";
 						td+="</tr>";
 						}
 						$("table tbody").html(td)
@@ -331,6 +331,7 @@
 		<script>
 			$(document).ready(function(){
 			  $(".btn").click(function(){
+			  	  var id=$(this).attr("data-id");
 						var title=$(this).attr("data-title");
 						var url=$(this).attr("data-url");
 						var img=$(this).attr("data-img");
@@ -347,17 +348,20 @@
 			    	$(".modify").click(function(){
 							$.ajax({
 				    		url:"http://wangwei.hangyutech.com/study/music-add.php",
+				    		
 				    		data:{
+				    			    id:id,
 				    					title:title,
 											url	:url,
 											img	:img,
 											singer:singer,
 											type:type,
-											status:status,},
+											status:status},
 				    		type:"post",
 				    		datatype:"json",
 				    		async:false,
 				    		success:function(Msong){
+				    			console.log(id);
 				    			if(Msong.status==1){
 				    				alert(Msong.msg);
 				    				window.location.reload();
