@@ -65,11 +65,10 @@
 		    		        url:"http://wangwei.hangyutech.com/study/login.php",
 		    		        type: "post",
 		    		        dataType: "json",
-		    		        data:{username:$("#Username").val(),password:$("#Password").val()},
+		    		        data:{username:$(".Username").val(),password:$(".Password").val()},
 		    		        async: false,
 		    		        success: function(json){
 		    		            if(json.status==1){
-		    		            	alert("111")
 		    		            	window.location.href="Admin_maintain.html";
 		    		            }else{
 		    		            	alert(json.msg);
