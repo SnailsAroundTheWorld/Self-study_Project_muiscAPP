@@ -221,7 +221,7 @@
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-		        <button type="button" class="btn btn-primary modify">确定</button>
+		        <button type="button" class="btn btn-primary modify"   onclick="Modify()" >确定</button>
 		      </div>
 		    </div>
 		  </div>
@@ -351,14 +351,12 @@
 			    	$("#Singer1").val(singer);
 			    	$("#SongType1").val(type);
 			    	$("input[name='SongState1']:checked").val(status);	
-			    	alert(status);
 			    });	
 			  });
 		</script>
 		<!--修改音乐-->
 		<script>
-			$(document).ready(function(){
-			  $(".modify").click(function(){
+			 function Modify(){ 
 							$.ajax({
 				    		url:"http://wangwei.hangyutech.com/study/music-add.php",
 				    		data:{
@@ -383,8 +381,7 @@
 				    			$("#myModal1").modal("hide");
 				    		}
 						  });
-			    	});
-			});
+			    	};
 		</script>
   </body>
 </html>
