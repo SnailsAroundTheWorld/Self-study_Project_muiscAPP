@@ -10,12 +10,12 @@
   </head>
   <body>
 		<div class="row">
-  		<div class="col-md-2 col-sm-6">
+  		<div class="col-md-2 col-sm-6 col-xs-4">
   			<div class="music_logo">
   			<img src="../static/img/music_logo.png" height="55" />My Music
   			</div>
   		</div>
-  		<div class="col-md-10 col-sm-6">
+  		<div class="col-md-10 col-sm-6 col-xs-8">
   			<div class="admin_top_left_div">
 		  			<a href=""><img src="../static/img/admin.png" height="19"/>admin </a>
 		  			<a href=""><img src="../static/img/backstage.png" height="20"/>后台页面 </a>
@@ -24,11 +24,11 @@
   		</div>
 		</div>
 		<div class="row">
-  		<div class="col-md-2 col-sm-3"  >
+  		<div class="col-md-2 col-sm-3 col-xs-4">
  					<dl>
  						<dt>日志</dt>
   					<dd><a href="Backstage_index.html"  target="_parent">后台登录日志</a></dd>
-  					<dd>操作日志</dd>
+  					<dd><a href="Operation_log.html"  target="_parent">操作日志</a></dd>
   				</dl>
   				<dl>	
   					<dt>管理员</dt>
@@ -39,7 +39,7 @@
 						<dd><a href="Music_index.html"  target="_parent">音乐</a></dd>
 					</dl>
   		</div>
-  		<div class="col-md-10 col-sm-9" >
+  		<div class="col-md-10 col-sm-9 col-xs-8">
   			<ol class="breadcrumb text-primary">
 				  <li>当前位置：</li>
 				  <li>音乐</li>
@@ -221,7 +221,7 @@
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-		        <button type="button" class="btn btn-primary modify"   onclick="Modify()" >确定</button>
+		        <button type="button" class="btn btn-primary"   onclick="Modify()" >确定</button>
 		      </div>
 		    </div>
 		  </div>
@@ -320,12 +320,14 @@
 						var status=SongList.data[i].status;
 							if(status==0){
 							status="正常";	
-						}else{
+						}else if(status==1){
 							status="禁用";
-						}	;
+						}else{
+							status="";
+						}		;
 						td+="<td>"+status+"</td>";
 						td+="<td>"+SongList.data[i].created_time+"</td>";
-						td+="<td><button type=\"button\" data-id=\""+SongList.data[i].id+"\" data-title=\""+SongList.data[i].title+"\" data-url=\""+SongList.data[i].url+"\" data-type=\""+SongList.data[i].type+"\" data-img=\""+SongList.data[i].img+"\" data-singer=\""+SongList.data[i].singer+"\" data-status=\""+SongList.data[i].status+"\" class=\"btn btn-default fr\" data-toggle=\"modal\" data-target=\"#myModal1\">修改</button></td>";
+						td+="<td><button type=\"button\" data-id=\""+SongList.data[i].id+"\" data-title=\""+SongList.data[i].title+"\" data-url=\""+SongList.data[i].url+"\" data-type=\""+SongList.data[i].type+"\" data-img=\""+SongList.data[i].img+"\" data-singer=\""+SongList.data[i].singer+"\" data-status=\""+SongList.data[i].status+"\" class=\"btn btn-default modify\" data-toggle=\"modal\" data-target=\"#myModal1\">修改</button><button type=\"button\"  class=\"btn btn-default\" onclick=\"del(this)\">删除</button></td>";
 						td+="</tr>";
 						}
 						$("table tbody").html(td)
@@ -336,7 +338,7 @@
 		<!--点击修改获取获取数据-->	
 		<script>
 			$(document).ready(function(){
-			  $(".btn").click(function(){
+			  $(".modify").click(function(){
 			  	  var id=$(this).attr("data-id");
 						var title=$(this).attr("data-title");
 						var url=$(this).attr("data-url");
@@ -371,7 +373,6 @@
 				    		datatype:"json",
 				    		async:false,
 				    		success:function(Msong){
-				    			
 				    			if(Msong.status==1){
 				    				alert(Msong.msg);
 				    				window.location.reload();
@@ -382,6 +383,36 @@
 				    		}
 						  });
 			    	};
+		</script>
+		<script>
+		function del(del){
+			$(del).parent().parent().remove();
+		}
+		/*function del(){ 
+			
+			 	 			var id=$(this).attr("data-id");
+							$.ajax({
+				        url:"http://wangwei.hangyutech.com/study/music-del.php",
+				        type: "post",
+				        dataType: "json",
+				        data:{id:id},
+				        async: false,
+				        success: function(del){
+				            if(del.status==1){
+				            	alert("sadd");
+				                alert(del.msg);
+				                window.location.reload();
+				            }else{
+				            	alert("111");
+				            	alert(del.msg);
+				            }
+				        },
+				        error: function(){
+				            console.log('服务器故障');
+				        }
+				        
+				       });
+			};*/
 		</script>
   </body>
 </html>

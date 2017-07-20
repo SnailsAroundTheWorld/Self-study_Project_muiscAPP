@@ -78,6 +78,7 @@
 							<tr class="info">
 								<th>ID</th>
 								<th>帐号</th>
+								<th class="hidden_pw">密码</th>
 								<th>用户组</th>
 								<th>用户状态</th>
 								<th>修改日期</th>
@@ -164,6 +165,66 @@
 		    </div>
 		  </div>
 		</div>
+<!--修改用户-->
+		<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel1">修改管理员</h4>
+		      </div>
+		      <div class="modal-body">
+		      		<form class="form-horizontal">
+		      				<div class="form-group">
+								    <label for="AddId1" class="col-sm-2 control-label">ID</label>
+								    <div class="col-sm-10">
+								      <input type="text" class="form-control" id="AddId1" placeholder="请输入ID">
+								    </div>
+								  </div>
+								  <div class="form-group">
+								    <label for="AddName1" class="col-sm-2 control-label">账号</label>
+								    <div class="col-sm-10">
+								      <input type="text" class="form-control" id="AddName1" placeholder="请输入账号">
+								    </div>
+								  </div>
+								  <div class="form-group">
+								    <label for="AddPassword1" class="col-sm-2 control-label">密码</label>
+								    <div class="col-sm-10">
+								      <input type="text" class="form-control" id="AddPassword1" placeholder="请输入密码">
+								    </div>
+								  </div>
+								  <div class="form-group">
+								    <label for="Type1" class="col-sm-2 control-label">类别</label>
+								    <div class="col-sm-10">
+								    	<select class="form-control" id="AddType1">
+											  <option value="1" selected="selected">超级管理员 </option>
+											  <option value="2">中级管理员</option>
+											  <option value="3">初级管理员</option>
+											</select>
+								    </div>
+								  </div>
+								  <div class="form-group">
+								    <label  class="col-sm-2 control-label">状态</label>
+								    <div class="col-sm-10">
+								    	<label class="radio-inline">
+											  <input type="radio" name="AddState1" id="state3" value="0" checked="checked"> 正常
+											</label>
+											<label class="radio-inline">
+											  <input type="radio" name="AddState1" id="state4" value="1"> 禁用
+											</label>
+								    </div>
+								  </div>
+							</form>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+		        <button type="button" class="btn btn-primary" onclick="modify()">确定</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+		
 		<script src="../static/js/jquery.min.js"></script>
     <script src="../static/js/bootstrap.min.js"></script>
     <script>
@@ -242,22 +303,118 @@
 							*/
 							var td="";
 							for(i=0;i<admin.data.length;i++){
+								switch(admin.data[i].type){
+								case "1":
+								type="超级管理员";
+								break;
+								case "2":
+								type="中级管理员 ";
+								break;
+								case "3":
+								type="初级管理员";
+								break;
+								default:
+								type="";						
+								};
+								var status=admin.data[i].status;
+								if(status==0){
+									status="正常";
+								}else if(status==1){
+									status="已禁用";
+								}else{
+									status="";
+								}
 								td+="<tr>"+"<td>"+admin.data[i].id+"</td>"
 								+"<td>"+admin.data[i].username+"</td>"
-								+"<td>"+admin.data[i].type+"</td>"
-								+"<td>"+admin.data[i].status+"</td>"
+								+"<td class=\"hidden_pw\">"+admin.data[i].password+"</td>"
+								+"<td>"+type+"</td>"
+								+"<td>"+status+"</td>"
 								+"<td>"+admin.data[i].created_time+"</td>"
 								+"<td>"+admin.data[i].update_time+"</td>"
 								+"<td>"+""+"</td>"
-								+"<td><button type=\"button\"  class=\"btn btn-default\">修改</button><button type=\"button\" class=\"btn btn-default\">删除</button>	</td>"
+								+"<td><button type=\"button\" data-id=\""+admin.data[i].id+"\" data-name=\""+admin.data[i].username+"\" data-pw=\""+admin.data[i].password+"\" data-type=\""+admin.data[i].type+"\" data-status=\""+status+"\"  class=\"btn btn-default modify\" data-toggle=\"modal\" data-target=\"#myModal1\">修改</button><button type=\"button\" onclick=\"del(this)\" class=\"btn btn-default\">删除</button>	</td>"
 								+"</tr>"
 							}
 							$(".table tbody").html(td);
 						}
 					});
 			});
-			
-			
+		</script>
+		<script>
+			$(document).ready(function(){
+			  $('.modify').click(function(){
+			    var id=$(this).attr("data-id");
+			    var name=$(this).attr("data-name");
+			    var pw=$(this).attr("data-pw");
+			    var type=$(this).attr("data-type");
+			    var status=$("input[name='AddState1']:checked").attr("data-status");
+			    $("#AddId1").val(id);
+			    $("#AddName1").val(name);
+			    $("#AddPassword1").val(pw);
+			    $("#AddType1").val(type);
+			    $("input[name='AddState1']:checked").val(status);
+			    });
+			});
+		</script>
+		<script>
+			function modify(){
+				$.ajax({
+				        url:"http://wangwei.hangyutech.com/study/manage-add.php",
+				        type: "post",
+				        dataType: "json",
+				        data:{
+				        	id:$("#AddId1").val(),
+				        	username:$("#AddName1").val(),
+				        	password:$("#AddPassword1").val(),
+				        	type:$("#AddType1").val(),
+				        	status: $("input[name='AddState1']:checked").val(),
+				        },
+				        async: false,
+				        success: function(add){
+				            if(add.status==1){
+				                alert(add.msg);
+				                window.location.reload();
+				            }else{
+				            	alert(add.msg);
+				            }
+				            $("#myModal1").modal("hide");
+				        },
+				        error: function(){
+				            console.log('服务器故障');
+				        }
+				        
+				       });
+			}
+		</script>
+		<script>
+			 function del(){ 
+			 	 			var id=$(this).attr("data-id");
+							$.ajax({
+				        url:"http://wangwei.hangyutech.com/study/manage-del.php",
+				        type: "post",
+				        dataType: "json",
+				        data:{id:id},
+				        async: false,
+				        success: function(del){
+				            if(del.status==1){
+				                alert(del.msg);
+				                window.location.reload();
+				            }else{
+				            	alert(del.msg);
+				            }
+				            $("#myModal1").modal("hide");
+				        },
+				        error: function(){
+				            console.log('服务器故障');
+				        }
+				        
+				       });
+			};
+		</script>
+		<script>
+			function del(del){
+			$(del).parent().parent().remove();
+		}
 		</script>
   </body>
 </html>
