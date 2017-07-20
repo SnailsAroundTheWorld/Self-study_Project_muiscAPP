@@ -327,7 +327,7 @@
 						}		;
 						td+="<td>"+status+"</td>";
 						td+="<td>"+SongList.data[i].created_time+"</td>";
-						td+="<td><button type=\"button\" data-id=\""+SongList.data[i].id+"\" data-title=\""+SongList.data[i].title+"\" data-url=\""+SongList.data[i].url+"\" data-type=\""+SongList.data[i].type+"\" data-img=\""+SongList.data[i].img+"\" data-singer=\""+SongList.data[i].singer+"\" data-status=\""+SongList.data[i].status+"\" class=\"btn btn-default modify\" data-toggle=\"modal\" data-target=\"#myModal1\">修改</button><button type=\"button\" data-DelId=\""+SongList.data[i].id+"\" class=\"btn btn-default\" >删除</button></td>";
+						td+="<td><button type=\"button\" data-id=\""+SongList.data[i].id+"\" data-title=\""+SongList.data[i].title+"\" data-url=\""+SongList.data[i].url+"\" data-type=\""+SongList.data[i].type+"\" data-img=\""+SongList.data[i].img+"\" data-singer=\""+SongList.data[i].singer+"\" data-status=\""+SongList.data[i].status+"\" class=\"btn btn-default modify\" data-toggle=\"modal\" data-target=\"#myModal1\">修改</button><button type=\"button\" data-DelId=\""+SongList.data[i].id+"\" class=\"btn btn-default delId\" >删除</button></td>";
 						td+="</tr>";
 						}
 						$("table tbody").html(td)
@@ -391,8 +391,8 @@
 			$(a).parent().parent().remove();
 		}*/
 		$(document).ready(function(){
-		  $(document).click(function(del){
-		   			  var id= $(del.target).attr("data-DelId")
+		  $(".delId").click(function(){
+		   			  var id= $(this).attr("data-DelId")
 							$.ajax({
 				        url:"http://wangwei.hangyutech.com/study/music-del.php",
 				        type: "post",
